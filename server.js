@@ -65,4 +65,5 @@ app.get('/suggestions', function(req, res){
 
 app.use(express.static('PublicFiles'))
 
-app.listen(8000, () => console.log('Podify running on port 8000!'))
+app.listen(process.env.PORT || 8000);
+
