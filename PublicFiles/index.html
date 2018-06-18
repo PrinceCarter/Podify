@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Podify - Search, Track, and Recommend Podcasts. </title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+
+
+	<!-- Font -->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+
+	<link href="common-css/bootstrap.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
+	<link href="common-css/ionicons.css" rel="stylesheet">
+
+
+	<link href="layout-1/css/styles.css" rel="stylesheet">
+
+	<link href="layout-1/css/responsive.css" rel="stylesheet">
+
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+</head>
+<body >
+
+	<header>
+		<div class="container-fluid position-relative no-side-padding">
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+
+			<ul class="main-menu visible-on-click" id="main-menu">
+				<li><a href="/index.html">Home</a></li>
+				<li><a href="/popular.html">Popular</a></li>
+				<li><a href="/categories.html">Catagories</a></li>
+				<li><a href="/subscriptions.html">Subscriptions</a></li>
+				<li><a href="/logout" id="logout">Log Out</a></li>
+			</ul><!-- main-menu -->
+
+			<div class="src-area">
+				<form id="searchForm">
+					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input id="search" class="src-input" type="text" placeholder="Search for Podcasts here...">
+				</form>
+			</div>
+
+		</div><!-- conatiner -->
+	</header>
+
+	<div class="slider"><h4 class="header-title">Hello, Prince<br /></h4><h6 class="subheader-title">We've suggested some podcasts for you below</h6></div><!-- slider -->
+
+	<section class="blog-area section">
+		<div class="container">
+
+			<div class="row" id="section">
+
+				<div class="col-lg-4 col-md-6" id="card1">
+					<div class="card h-100">
+						<div class="single-post post-style-1">
+
+							<div class="blog-image"><img src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
+
+							<div class="blog-info">
+
+								<h4 class="title"><a href="#"><b></b></a></h4>
+
+								<ul class="post-footer">
+									<!-- <li><a href="#"><i class="ion-heart"></i>57</a></li> -->
+									<li><a href="#"><i class="logo-rss"></i>138</a></li>
+								</ul>
+
+							</div><!-- blog-info -->
+						</div><!-- single-post -->
+					</div><!-- card -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+			</div><!-- row -->
+
+			<a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+
+		</div><!-- container -->
+	</section><!-- section -->
+
+
+	<footer>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-section">
+						<p class="copyright">Prince Carter @ 2018. All rights reserved.</p>
+						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-4 col-md-6">
+						<div class="footer-section">
+						<h4 class="title"><b>CATAGORIES</b></h4>
+						<ul>
+							<li><a href="/subscriptions.html">Popular</a></li>
+							<li><a href="/subscriptions.html">Subscriptions</a></li>
+							<li><a href="#">MUSIC</a></li>
+						</ul>
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-section">
+
+						<h4 class="title"><b>SUBSCRIBE</b></h4>
+						<div class="input-area">
+							<form>
+								<input class="email-input" type="text" placeholder="Enter your email">
+								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
+							</form>
+						</div>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</footer>
+
+
+	<!-- SCIPTS -->
+
+	<script src="common-js/jquery-3.1.1.min.js"></script>
+
+	<script>
+
+	function loadTopPodcast(){
+
+		$.ajax({
+
+			method: 'GET',
+			url: 'https://gpodder.net/suggestions/25.json'
+
+
+		}).done(function(res){
+
+			console.log(res)
+
+			makeCard(res)
+
+		})
+
+
+	}
+
+	$(function(){
+
+		$('#searchForm').on('submit', function(e){
+
+			e.preventDefault()
+
+			var searchText = $('#search').val()
+
+			window.location.href = '/search.html?q=' + searchText
+
+		})
+
+	})
+
+	function makeCard(jsonObj){
+
+		var body = document.getElementById('section');
+
+		var card = document.getElementById('card1');
+
+		var clone = card.cloneNode(true);
+
+		card.remove()
+
+		for (var i = 0; i < jsonObj.length; i++){
+
+			var clone = card.cloneNode(true);
+
+			clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
+      clone.getElementsByTagName("a")[1].href = jsonObj[i].url;
+      clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + jsonObj[i].subscribers;
+			clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;
+
+			$(clone).find("#podcast-img").attr('src', ''+ jsonObj[i].logo_url + '');
+
+			console.log(jsonObj[i].logo_url)
+
+			body.appendChild(clone);
+
+		}
+
+	}
+
+	</script>
+
+
+
+	<script src="common-js/tether.min.js"></script>
+
+	<script src="common-js/bootstrap.js"></script>
+
+	<script src="common-js/scripts.js"></script>
+
+
+
+</body>
+</html>
