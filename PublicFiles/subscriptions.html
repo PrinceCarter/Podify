@@ -6,27 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 
-
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 	<!-- Font -->
-
+  <link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 
-
 	<!-- Stylesheets -->
-
 	<link href="common-css/bootstrap.css" rel="stylesheet">
-
 	<link href="common-css/ionicons.css" rel="stylesheet">
-
-
-	<link href="layout-1/css/styles.css" rel="stylesheet">
-
-	<link href="layout-1/css/responsive.css" rel="stylesheet">
-
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<link href="subscriptions/css/styles.css" rel="stylesheet">
+	<link href="subscriptions/css/responsive.css" rel="stylesheet">
 
 </head>
-<body >
+<body>
 
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
@@ -42,16 +34,16 @@
 			</ul><!-- main-menu -->
 
 			<div class="src-area">
-				<form>
-					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-					<input class="src-input" type="text" placeholder="Type of search">
+				<form id="searchForm">
+          <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input id="search" class="src-input" type="text" placeholder="Type of search">
 				</form>
 			</div>
 
 		</div><!-- conatiner -->
 	</header>
 
-	<div class="slider"></div><!-- slider -->
+	<div class="slider"><h4 class="header-title">Subscriptions<br /></h4></div><!-- slider -->
 
 	<section class="blog-area section">
 		<div class="container">
@@ -66,11 +58,13 @@
 
 							<div class="blog-info">
 
-								<h4 class="title"><a href="#"><b></b></a></h4>
-                <p>
-                  This is some text
-                </p>
-                <a class="subscribe" href="#">Click here to Subscribe!</a>
+								<h4 class="title"><b><a></a></b></h4>
+                <p></p>
+                <div class="tag-area">
+                  <ul>
+                  <li><a class="subscribe" href="#">Click here to view Podcast!</a></li>
+                </ul>
+                </div>
 								<ul class="post-footer">
 									<!-- <li><a href="#"><i class="ion-heart"></i>57</a></li> -->
 									<li><a href="#"><i class="ion-eye"></i>138</a></li>
@@ -83,8 +77,6 @@
 
 			</div><!-- row -->
 
-			<a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
-
 		</div><!-- container -->
 	</section><!-- section -->
 
@@ -94,40 +86,15 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-6 col-md-6">
 					<div class="footer-section">
-
-						<a class="logo" href="#"><img src="images/logo.png" alt="Logo Image"></a>
-						<p class="copyright">Bona @ 2017. All rights reserved.</p>
+						<p class="copyright">Prince Carter @ 2017. All rights reserved.</p>
 						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-						<ul class="icons">
-							<li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
-							<li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
-							<li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-							<li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
-							<li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
-						</ul>
 
 					</div><!-- footer-section -->
 				</div><!-- col-lg-4 col-md-6 -->
 
-				<div class="col-lg-4 col-md-6">
-						<div class="footer-section">
-						<h4 class="title"><b>CATAGORIES</b></h4>
-						<ul>
-							<li><a href="#">BEAUTY</a></li>
-							<li><a href="#">HEALTH</a></li>
-							<li><a href="#">MUSIC</a></li>
-						</ul>
-						<ul>
-							<li><a href="#">SPORT</a></li>
-							<li><a href="#">DESIGN</a></li>
-							<li><a href="#">TRAVEL</a></li>
-						</ul>
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
-
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-6 col-md-6">
 					<div class="footer-section">
 
 						<h4 class="title"><b>SUBSCRIBE</b></h4>
@@ -152,19 +119,20 @@
 
   <script>
 
-  $(function(){
+  // Search Podcast
+	$(function(){
 
-    $('#searchForm').on('submit', function(e){
+		$('#searchForm').on('submit', function(e){
 
-      e.preventDefault()
+			e.preventDefault()
 
-      var searchText = $('#search').val()
+			var searchText = $('#search').val()
 
-      window.location.href = '/search.html?q=' + searchText
+			window.location.href = '/search.html?q=' + searchText
 
-    })
+		})
 
-  })
+	})
 
   function loadSubscriptions(){
 
@@ -179,7 +147,6 @@
       makeCard(JSON.parse(res))
 
     })
-
 
   }
 
@@ -198,34 +165,20 @@
 		for (var i = 0; i < jsonObj.length; i++){
 
       var clone = card.cloneNode(true);
-
       clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
       clone.getElementsByTagName("a")[1].href = jsonObj[i].url;
       clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + jsonObj[i].subscribers;
       clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;
-
       $(clone).find("#podcast-img").attr('src', ''+ jsonObj[i].logo_url + '');
-
-      console.log(jsonObj[i].logo_url)
-
 			body.appendChild(clone);
 
 		}
 
-
 	}
 
   </script>
-
-
-
 	<script src="common-js/tether.min.js"></script>
-
 	<script src="common-js/bootstrap.js"></script>
-
 	<script src="common-js/scripts.js"></script>
-
-
-
 </body>
 </html>

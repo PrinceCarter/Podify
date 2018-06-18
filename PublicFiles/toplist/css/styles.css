@@ -155,6 +155,13 @@ color: white;}
 
 }
 
+.title {
+
+	font-size: 24px;
+	font-weight: 900;
+
+}
+
 /* ---------------------------------
 5. SINGLE POST
 --------------------------------- */
@@ -235,6 +242,13 @@ color: white;}
 
 .load-more-btn:hover{ transform: translateY(-2px); box-shadow: 5px 10px 20px rgba(0,0,0,.3); }
 
+/* TAG AREA */
+
+.info-area .tag-area{ padding: 30px 0px; }
+
+.tag-area > ul > li > a{ padding: 7px 12px; float: left; margin: 20px 0 20px 0; border: 1px solid #eee; background: #F5F6F8; }
+
+.tag-area > ul > li > a:hover{ background: none; }
 
 
 /* ---------------------------------

@@ -10,23 +10,16 @@
 	<!-- Font -->
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
 
 	<!-- Stylesheets -->
-
 	<link href="common-css/bootstrap.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
 	<link href="common-css/ionicons.css" rel="stylesheet">
-
-
 	<link href="layout-1/css/styles.css" rel="stylesheet">
-
 	<link href="layout-1/css/responsive.css" rel="stylesheet">
-
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </head>
-<body >
-
+<body>
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
@@ -60,15 +53,15 @@
 					<div class="card h-100">
 						<div class="single-post post-style-1">
 
-							<div class="blog-image"><img src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img src="" alt="Blog Image"></div>
 
 							<div class="blog-info">
 
 								<h4 class="title"><a href="#"><b></b></a></h4>
-
+								<p></p>
 								<ul class="post-footer">
 									<!-- <li><a href="#"><i class="ion-heart"></i>57</a></li> -->
-									<li><a href="#"><i class="logo-rss"></i>138</a></li>
+									<li><a href="#"><i class="logo-rss"></i></a></li>
 								</ul>
 
 							</div><!-- blog-info -->
@@ -89,7 +82,7 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-6 col-md-6">
 					<div class="footer-section">
 						<p class="copyright">Prince Carter @ 2018. All rights reserved.</p>
 						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
@@ -97,18 +90,7 @@
 					</div><!-- footer-section -->
 				</div><!-- col-lg-4 col-md-6 -->
 
-				<div class="col-lg-4 col-md-6">
-						<div class="footer-section">
-						<h4 class="title"><b>CATAGORIES</b></h4>
-						<ul>
-							<li><a href="/subscriptions.html">Popular</a></li>
-							<li><a href="/subscriptions.html">Subscriptions</a></li>
-							<li><a href="#">MUSIC</a></li>
-						</ul>
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
-
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-6 col-md-6">
 					<div class="footer-section">
 
 						<h4 class="title"><b>SUBSCRIBE</b></h4>
@@ -138,19 +120,19 @@
 		$.ajax({
 
 			method: 'GET',
-			url: 'https://gpodder.net/suggestions/25.json'
+			url: '/suggestions'
 
 
 		}).done(function(res){
-
-			console.log(res)
-
+			
 			makeCard(res)
 
 		})
 
 
 	}
+
+	loadTopPodcast()
 
 	$(function(){
 
@@ -174,7 +156,7 @@
 
 		var clone = card.cloneNode(true);
 
-		card.remove()
+		document.getElementById("card1").style.display = "none";
 
 		for (var i = 0; i < jsonObj.length; i++){
 
@@ -184,11 +166,7 @@
       clone.getElementsByTagName("a")[1].href = jsonObj[i].url;
       clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + jsonObj[i].subscribers;
 			clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;
-
 			$(clone).find("#podcast-img").attr('src', ''+ jsonObj[i].logo_url + '');
-
-			console.log(jsonObj[i].logo_url)
-
 			body.appendChild(clone);
 
 		}
@@ -196,16 +174,8 @@
 	}
 
 	</script>
-
-
-
 	<script src="common-js/tether.min.js"></script>
-
 	<script src="common-js/bootstrap.js"></script>
-
 	<script src="common-js/scripts.js"></script>
-
-
-
 </body>
 </html>
