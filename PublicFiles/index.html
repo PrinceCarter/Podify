@@ -42,7 +42,7 @@
 		</div><!-- conatiner -->
 	</header>
 
-	<div class="slider"><h4 class="header-title">Hello,<br /></h4><h6 class="subheader-title">We've suggested some podcasts for you below</h6></div><!-- slider -->
+	<div class="slider text-center"><h4 class="header-title animate-pop-in">We've suggested some podcasts for you</h4></div><!-- slider -->
 
 	<section class="blog-area section">
 		<div class="container">
@@ -154,19 +154,41 @@
 
 		var card = document.getElementById('card1');
 
-		var clone = card.cloneNode(true);
+    var clone = card.cloneNode(true);
 
-		document.getElementById("card1").style.display = "none";
+		card.remove()
 
-		for (var i = 0; i < jsonObj.length; i++){
+  var subs = []
 
-			var clone = card.cloneNode(true);
+  // Load Subs array with all JSON objects
+  for (var i = 0; i < jsonObj.length; i++){
 
-			clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
-      clone.getElementsByTagName("a")[1].href = jsonObj[i].url;
-      clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + jsonObj[i].subscribers;
-			clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;
-			$(clone).find("#podcast-img").attr('src', ''+ jsonObj[i].logo_url + '');
+        subs.push(jsonObj[i])
+
+  }
+
+  function sortJSON(data, key, way) {
+    return data.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        if (way === '123' ) { return ((x < y) ? -1 : ((x > y) ? 1 : 0)); }
+        if (way === '321') { return ((x > y) ? -1 : ((x < y) ? 1 : 0)); }
+    });
+  }
+
+  // Sort the JSON objects based on the subscriptions
+  sortJSON(subs, 'subscribers', '321')
+
+  // Load out each card from the sort array
+	for (var i = 0; i < subs.length; i++){
+
+      var clone = card.cloneNode(true);
+      clone.firstChild.nextSibling.style.display = "block";
+			clone.getElementsByTagName("a")[0].innerText = subs[i].title;
+      clone.getElementsByTagName("a")[1].href = subs[i].mygpo_link;
+      clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + subs[i].subscribers;
+      clone.getElementsByTagName('p')[0].innerText = subs[i].description;
+      $(clone).find("#podcast-img").attr('src', ''+ subs[i].logo_url + '');
+      console.log(subs)
 			body.appendChild(clone);
 
 		}

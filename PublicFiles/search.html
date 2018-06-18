@@ -65,7 +65,7 @@
                 </div>
 								<ul class="post-footer">
 									<!-- <li><a href="#"><i class="ion-heart"></i>57</a></li> -->
-									<li><a href="#"><i class="ion-eye"></i>138</a></li>
+									<li><a href="#" class="subscribers"><i class="ion-eye"></i></a></li>
 								</ul>
 
 							</div><!-- blog-info -->
@@ -157,14 +157,37 @@
 
 		card.remove()
 
-		for (var i = 0; i < jsonObj.length; i++){
+  	var subs = []
+
+  // Load Subs array with all JSON objects
+  for (var i = 0; i < jsonObj.length; i++){
+
+        subs.push(jsonObj[i])
+
+  }
+
+  function sortJSON(data, key, way) {
+    return data.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        if (way === '123' ) { return ((x < y) ? -1 : ((x > y) ? 1 : 0)); }
+        if (way === '321') { return ((x > y) ? -1 : ((x < y) ? 1 : 0)); }
+    });
+  }
+
+  // Sort the JSON objects based on the subscriptions
+  sortJSON(subs, 'subscribers', '321')
+
+  // Load out each card from the sort array
+	for (var i = 0; i < subs.length; i++){
 
       var clone = card.cloneNode(true);
-			clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
-      clone.getElementsByTagName("a")[1].href = jsonObj[i].url;
-      clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + jsonObj[i].subscribers;
-      clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;
-      $(clone).find("#podcast-img").attr('src', ''+ jsonObj[i].logo_url + '');
+      clone.firstChild.nextSibling.style.display = "block";
+			clone.getElementsByTagName("a")[0].innerText = subs[i].title;
+      clone.getElementsByTagName("a")[1].href = subs[i].mygpo_link;
+      clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + subs[i].subscribers;
+      clone.getElementsByTagName('p')[0].innerText = subs[i].description;
+      $(clone).find("#podcast-img").attr('src', ''+ subs[i].logo_url + '');
+      console.log(subs)
 			body.appendChild(clone);
 
 		}

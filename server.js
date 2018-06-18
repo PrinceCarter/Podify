@@ -14,6 +14,8 @@ var username;
 app.post('/login', urlencodedParser, function (req, res) {
   if (!req.body) return res.sendStatus(400)
 
+  Cookie.set('username', 'prince')
+
   username = req.body.username;
 
   request.post({url: 'https://gpodder.net/api/2/auth/'+ username +'/login.json', jar: j},function(e,r,body){
@@ -28,7 +30,7 @@ app.post('/login', urlencodedParser, function (req, res) {
 app.get('/logout', function (req, res) {
 
   request.post({url: 'https://gpodder.net/api/2/auth/'+ username +'/logout.json', jar: j},function(e,r,body){
-    
+
   res.redirect('/login.html')
 
   })

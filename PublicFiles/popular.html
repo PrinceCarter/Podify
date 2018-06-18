@@ -40,7 +40,7 @@
 		</div><!-- conatiner -->
 	</header>
 
-	<div class="slider"><h4 class="header-title">Top 15 Podcasts<br /></h4></div><!-- slider -->
+	<div class="slider"><h4 class="header-title animate-pop-in">Check out the Top 15 Podcasts<br /></h4></div><!-- slider -->
 
 	<section class="blog-area section">
 		<div class="container">
@@ -48,7 +48,7 @@
 			<div class="row" id="section">
 
 				<div class="col-lg-4 col-md-6" id="card1">
-					<div class="card h-100">
+					<div class="card h-100" >
 						<div class="single-post post-style-1">
 
 							<div class="blog-image"><img id="podcast-img" src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
@@ -131,8 +131,6 @@
 
 		}).done(function(res){
 
-			console.log(res)
-
 			makeCard(res)
 
 		})
@@ -165,13 +163,18 @@
 
     var clone = card.cloneNode(true);
 
+		var subs = []
+
     card.remove()
 
 		for (var i = 0; i < jsonObj.length; i++){
 
+      subs.push(jsonObj[i].subscribers)
 			var clone = card.cloneNode(true);
+			console.log(jsonObj[i])
+      clone.firstChild.nextSibling.style.display = "block";
 			clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
-      clone.getElementsByTagName("a")[1].href = jsonObj[i].url;
+      clone.getElementsByTagName("a")[1].href = jsonObj[i].mygpo_link;
       clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + jsonObj[i].subscribers;
       clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;
       $(clone).find("#podcast-img").attr('src', ''+ jsonObj[i].logo_url + '');
@@ -179,6 +182,9 @@
 
 		}
 
+    subs.sort(function(a, b){return b-a})
+
+    console.log(subs)
 
 	}
 

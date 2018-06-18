@@ -138,17 +138,140 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 /* ---------------------------------
 4. SLIDER
 --------------------------------- */
+.slider{
+	height: 400px;
+	-webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 18px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
 
-.slider{ height: 300px; width: 100%; background-image: url(../../images/slider-1.jpg); background-size: cover; }
+  -webkit-perspective: 100px;
+
+          perspective: 100px;
+}
+
+.slider:before{
+	-webkit-animation: fade-slide-down 2s .5s cubic-bezier(0, 0.5, 0, 1) forwards;
+          animation: fade-slide-down 2s .5s cubic-bezier(0, 0.5, 0, 1) forwards;
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.8)),
+              url(../../images/slider-3.jpg) no-repeat bottom;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.8)),
+              url(../../images/slider-3.jpg) no-repeat bottom;
+  background-size: cover;
+    bottom: 0;
+  content: "";
+    left: 0;
+  opacity: 0;
+  position: absolute;
+    right: 0;
+    top: 0;
+  z-index: -1;
+}
+
+.slider:after{
+  content: "";
+  height: 40rem;
+  left: -5%;
+  position: absolute;
+    right: -5%;
+    top: 90%;
+  -webkit-transform: rotateZ(-4deg);
+          transform: rotateZ(-4deg);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  z-index: 0;
+}
+
+.animate-pop-in {
+  -webkit-animation: pop-in 2s .5s cubic-bezier(0, 0.9, 0.3, 1.2) forwards;
+          animation: pop-in 2s .5s cubic-bezier(0, 0.9, 0.3, 1.2) forwards;
+  opacity: 0;
+}
+/* Animations */
+
+@-webkit-keyframes fade-slide-down {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-4rem);
+						transform: translateY(-4rem);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: none;
+						transform: none;
+	}
+}
+
+@keyframes fade-slide-down {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-4rem);
+						transform: translateY(-4rem);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: none;
+						transform: none;
+	}
+}
+
+@-webkit-keyframes pop-in {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-4rem) scale(.8);
+            transform: translateY(-4rem) scale(.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-4rem) scale(.8);
+            transform: translateY(-4rem) scale(.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@-webkit-keyframes rotate-up {
+  100% {
+    -webkit-transform: rotateZ(-4deg);
+            transform: rotateZ(-4deg);
+  }
+}
+
+@keyframes rotate-up {
+  100% {
+    -webkit-transform: rotateZ(-4deg);
+            transform: rotateZ(-4deg);
+  }
+}
 
 .slider .title{ color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,.3); }
 
 .header-title{
-padding: 100px 50px 0px 0px;
 font-family: 'Paytone One', sans-serif;
 font-size: 64px;
 color: white;
-
 }
 
 .subheader-title {
