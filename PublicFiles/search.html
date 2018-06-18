@@ -161,8 +161,9 @@
 
       var clone = card.cloneNode(true);
 			clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
-      clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;
+      clone.getElementsByTagName("a")[1].href = jsonObj[i].url;
       clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + jsonObj[i].subscribers;
+      clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;
       $(clone).find("#podcast-img").attr('src', ''+ jsonObj[i].logo_url + '');
 			body.appendChild(clone);
 
