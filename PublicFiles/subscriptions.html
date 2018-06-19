@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+
 	<title>Podify - My Subscriptions</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,9 +23,7 @@
 
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
-
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
-
       <ul class="main-menu visible-on-click" id="main-menu">
 				<li><a href="/index.html">Home</a></li>
 				<li><a href="/popular.html">Popular</a></li>
@@ -32,16 +31,14 @@
 				<li><a href="/subscriptions.html">Subscriptions</a></li>
 				<li><a href="/logout" id="logout">Log Out</a></li>
 			</ul><!-- main-menu -->
-
 			<div class="src-area">
 				<form id="searchForm">
           <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
 					<input id="search" class="src-input" type="text" placeholder="Search for Podcasts here...">
-				</form>
+				</form><!-- search -->
 			</div>
-
 		</div><!-- conatiner -->
-	</header>
+	</header><!-- header -->
 
 	<div class="slider text-center">
 		<div class="container">
@@ -50,25 +47,19 @@
 				<h4 class="header-title animate-pop-in col-lg-10">Here Are Your <br/>Subscriptions</h4></div><!-- slider -->
 				<div class="col-lg-1"></div>
 			</div>
-	</div>
+	</div><!-- slider -->
 
 	<section class="blog-area section">
 		<div class="container">
-
 			<div class="row" id="section">
-
 				<div id="overlay">
 					<div class="spinner"></div>
 				</div>
-
 				<div class="col-lg-4 col-md-6" id="card1">
 					<div class="card h-100">
 						<div class="single-post post-style-1">
-
 							<div class="blog-image"><img id="podcast-img" src="" alt="Blog Image"></div>
-
 							<div class="blog-info">
-
 								<h4 class="title"><b><a href=""></a></b></h4>
                 <p></p>
                 <div class="tag-area">
@@ -77,140 +68,37 @@
                 </ul>
                 </div>
 								<ul class="post-footer">
-									<!-- <li><a href="#"><i class="ion-heart"></i>57</a></li> -->
 									<li><a><i class="ion-eye"></i>138</a></li>
 								</ul>
-
 							</div><!-- blog-info -->
 						</div><!-- single-post -->
 					</div><!-- card -->
 				</div><!-- col-lg-4 col-md-6 -->
-
 			</div><!-- row -->
-
 		</div><!-- container -->
 	</section><!-- section -->
 
-
 	<footer>
-
 		<div class="container">
 			<div class="row">
-
 				<div class="col-lg-2 col-md-2"></div>
 				<div class="col-lg-8 col-md-8">
 					<div class="footer-section">
 						<p class="copyright text-center">Prince Carter @ 2018. All rights reserved.</p>
 						<p class="copyright text-center">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
 					<div class="col-lg-2 col-md-2"></div>
-
 					</div><!-- footer-section -->
 				</div><!-- col-lg-4 col-md-6 -->
-
 			</div><!-- row -->
 		</div><!-- container -->
-
-	</footer>
-
+	</footer><!-- footer -->
 
 	<!-- SCIPTS -->
-
 	<script src="common-js/jquery-3.1.1.min.js"></script>
-
-  <script>
-
-	var overlay = document.getElementById("overlay");
-
-	window.addEventListener('load', function(){
-
-		overlay.style.display = 'none';
-
-	})
-
-  // Search Podcast
-	$(function(){
-
-		$('#searchForm').on('submit', function(e){
-
-			e.preventDefault()
-
-			var searchText = $('#search').val()
-
-			window.location.href = '/search.html?q=' + searchText
-
-		})
-
-	})
-
-  function loadSubscriptions(){
-
-    $.ajax({
-
-      method: 'GET',
-      url: '/subscriptions'
-
-
-    }).done(function(res){
-
-      makeCard(JSON.parse(res))
-
-    })
-
-  }
-
-  loadSubscriptions()
-
-  function makeCard(jsonObj){
-
-		var body = document.getElementById('section');
-
-		var card = document.getElementById('card1');
-
-    var clone = card.cloneNode(true);
-
-		card.remove()
-
-  var subs = []
-
-  // Load Subs array with all JSON objects
-  for (var i = 0; i < jsonObj.length; i++){
-
-        subs.push(jsonObj[i])
-
-  }
-
-  function sortJSON(data, key, way) {
-    return data.sort(function(a, b) {
-        var x = a[key]; var y = b[key];
-        if (way === '123' ) { return ((x < y) ? -1 : ((x > y) ? 1 : 0)); }
-        if (way === '321') { return ((x > y) ? -1 : ((x < y) ? 1 : 0)); }
-    });
-  }
-
-  // Sort the JSON objects based on the subscriptions
-  sortJSON(subs, 'subscribers', '321')
-
-  // Load out each card from the sort array
-	for (var i = 0; i < subs.length; i++){
-
-      var clone = card.cloneNode(true);
-      clone.firstChild.nextSibling.style.display = "block";
-			clone.getElementsByTagName("a")[0].innerText = subs[i].title;
-			clone.getElementsByTagName("a")[0].href = jsonObj[i].website;
-      clone.getElementsByTagName("a")[1].href = subs[i].mygpo_link;
-      clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + subs[i].subscribers;
-      clone.getElementsByTagName('p')[0].innerText = subs[i].description;
-      $(clone).find("#podcast-img").attr('src', ''+ subs[i].logo_url + '');
-      console.log(subs)
-			body.appendChild(clone);
-
-		}
-
-	}
-
-  </script>
+  <script src="subscriptions/subscriptions.j"></script>
 	<script src="common-js/tether.min.js"></script>
 	<script src="common-js/bootstrap.js"></script>
 	<script src="common-js/scripts.js"></script>
+
 </body>
 </html>

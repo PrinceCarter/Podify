@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-	<title>Podify - Catagories </title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="UTF-8">
 
+	<title>Podify - Categories</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
 
 	<!-- Font -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -16,142 +16,81 @@
 	<link href="common-css/ionicons.css" rel="stylesheet">
 	<link href="categories/css/styles.css" rel="stylesheet">
 	<link href="categories/css/responsive.css" rel="stylesheet">
+
 </head>
-<body>
 
-	<header>
-		<div class="container-fluid position-relative no-side-padding">
-			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+	<body>
 
-      <ul class="main-menu visible-on-click" id="main-menu">
-				<li><a href="/index.html">Home</a></li>
-				<li><a href="/popular.html">Popular</a></li>
-				<li><a href="/categories.html">Catagories</a></li>
-				<li><a href="/subscriptions.html">Subscriptions</a></li>
-				<li><a href="/logout" id="logout">Log Out</a></li>
-			</ul><!-- main-menu -->
+		<header>
+			<div class="container-fluid position-relative no-side-padding">
+				<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+	      <ul class="main-menu visible-on-click" id="main-menu">
+					<li><a href="/index.html">Home</a></li>
+					<li><a href="/popular.html">Popular</a></li>
+					<li><a href="/categories.html">Categories</a></li>
+					<li><a href="/subscriptions.html">Subscriptions</a></li>
+					<li><a href="/logout" id="logout">Log Out</a></li>
+				</ul><!-- main-menu -->
+				<div class="src-area">
+					<form id="searchForm">
+						<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+						<input id="search" class="src-input" type="text" placeholder="Search for Podcasts here...">
+					</form><!-- search -->
+				</div>
+			</div><!-- conatiner -->
+		</header>
 
-			<div class="src-area">
-				<form id="searchForm">
-					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-					<input id="search" class="src-input" type="text" placeholder="Search for Podcasts here...">
-				</form>
-			</div>
+		<div class="slider text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-1"></div>
+					<h4 class="header-title animate-pop-in col-lg-10">Explore Podcast<br/>Categories Here</h4></div><!-- slider -->
+					<div class="col-lg-1"></div>
+				</div>
+		</div><!-- slider -->
 
-		</div><!-- conatiner -->
-	</header>
+		<section class="blog-area section">
+			<div class="container">
+				<div id="overlay">
+					<div class="spinner"></div>
+				</div>
+				<div class="row" id="section">
+	        <div class="col-lg-2"></div>
+	        	<div class="col-lg-8">
+	          <div class="tag-area">
+	            <h4 class="title text-center"><b>Click on a category to find a podcast that you like!</b></h4>
+	            <ul id="categories">
+	              <li id="category"><a class="cat_button" href="/search.html?q=music">Music</a></li>
+	            </ul>
+	          </div><!-- tags -->
+	          <div class="col-lg-2"></div>
+						</div>
+	      </div><!-- info-area -->
+				</div><!-- row -->
+			</div><!-- container -->
+		</section><!-- section -->
 
-	<div class="slider text-center">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-1"></div>
-				<h4 class="header-title animate-pop-in col-lg-10">Explore Podcast<br/>Categories Here</h4></div><!-- slider -->
-				<div class="col-lg-1"></div>
-			</div>
-	</div>
-
-	<section class="blog-area section">
-		<div class="container">
-			<div id="overlay">
-				<div class="spinner"></div>
-			</div>
-
-			<div class="row" id="section">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-          <div class="tag-area">
-
-            <h4 class="title text-center"><b>Click on a category to find a podcast that you like!</b></h4>
-            <ul>
-              <li><a class="cat_button" href="/search.html?q=music">Music</a></li>
-              <li><a class="cat_button" href="/search.html?q=sports">Sports</a></li>
-              <li><a class="cat_button" href="/search.html?q=poltics">Politics</a></li>
-              <li><a class="cat_button" href="/search.html?q=games">Video Games</a></li>
-              <li><a  class="cat_button"href="/search.html?q=movies">Movies</a></li>
-              <li><a  class="cat_button"href="/search.html?q=technology">Technology</a></li>
-              <li><a  class="cat_button"href="/search.html?q=careers">Careers</a></li>
-              <li><a  class="cat_button"href="/search.html?q=education">Education</a></li>
-              <li><a  class="cat_button"href="/search.html?q=food">Food</a></li>
-              <li><a  class="cat_button"href="/search.html?q=shopping">Shopping</a></li>
-              <li><a  class="cat_button"href="/search.html?q=comedy">Comedy</a></li>
-              <li><a  class="cat_button"href="/search.html?q=hobbies">Hobbies</a></li>
-              <li><a  class="cat_button"href="/search.html?q=news">News</a></li>
-              <li><a  class="cat_button"href="/search.html?q=self%20help">Self-Help</a></li>
-              <li><a  class="cat_button"href="/search.html?q=cars">Cars</a></li>
-              <li><a  class="cat_button"href="/search.html?q=religion">Religion</a></li>
-              <li><a  class="cat_button"href="/search.html?q=business">Business</a></li>
-							<li><a  class="cat_button"href="/search.html?q=relationships">Relationships</a></li>
-							<li><a  class="cat_button"href="/search.html?q=philosophy">Philosophy</a></li>
-            </ul>
-
-          </div><!-- subscribe-area -->
-          <div class="col-lg-2"></div>
-        </div>
-
-
-      </div><!-- info-area -->
-
-			</div><!-- row -->
-
-		</div><!-- container -->
-	</section><!-- section -->
-
-
-	<footer>
-
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-2 col-md-2"></div>
-				<div class="col-lg-8 col-md-8">
-					<div class="footer-section">
-						<p class="copyright text-center">Prince Carter @ 2018. All rights reserved.</p>
-						<p class="copyright text-center">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+		<footer>
+			<div class="container">
+				<div class="row">
 					<div class="col-lg-2 col-md-2"></div>
+					<div class="col-lg-8 col-md-8">
+						<div class="footer-section">
+							<p class="copyright text-center">Prince Carter @ 2018. All rights reserved.</p>
+							<p class="copyright text-center">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+						<div class="col-lg-2 col-md-2"></div>
+						</div><!-- footer-section -->
+					</div><!-- col-lg-4 col-md-6 -->
+				</div><!-- row -->
+			</div><!-- container -->
+		</footer><!-- footer -->
 
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
+		<!-- SCIPTS -->
+		<script src="common-js/jquery-3.1.1.min.js"></script>
+		<script src="categories/categories.js"></script>
+		<script src="common-js/tether.min.js"></script>
+		<script src="common-js/bootstrap.js"></script>
+		<script src="common-js/scripts.js"></script>
 
-			</div><!-- row -->
-		</div><!-- container -->
-
-	</footer>
-
-
-	<!-- SCIPTS -->
-
-	<script src="common-js/jquery-3.1.1.min.js"></script>
-
-	<script>
-
-	var overlay = document.getElementById("overlay");
-
-	window.addEventListener('load', function(){
-
-		overlay.style.display = 'none';
-
-	})
-
-	// Search Podcast
-	$(function(){
-
-		$('#searchForm').on('submit', function(e){
-
-			e.preventDefault()
-
-			var searchText = $('#search').val()
-
-			window.location.href = '/search.html?q=' + searchText
-
-		})
-
-	})
-
-
-	</script>
-	<script src="common-js/tether.min.js"></script>
-	<script src="common-js/bootstrap.js"></script>
-	<script src="common-js/scripts.js"></script>
-
-</body>
-</html>
+	</body>
+	</html>
