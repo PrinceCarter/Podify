@@ -53,7 +53,6 @@ app.get('/logout', function (req, res) {
 
   }
 
-
   })
 
 })
