@@ -1,12 +1,13 @@
 
 	var overlay = document.getElementById("overlay");
 
+// Loading animation
 	window.addEventListener('load', function(){
 
   	overlay.style.display = 'none';
 
 	})
-
+// Get the Top 15 podcast from gPodder
 	function loadTopPodcast(){
 
 		$.ajax({
@@ -26,7 +27,7 @@
 
   loadTopPodcast()
 
-	// Search Podcast
+// Search for Podcast
 	$(function(){
 
 		$('#searchForm').on('submit', function(e){
@@ -41,6 +42,7 @@
 
 	})
 
+// Create Podcast Cards
 	function makeCard(jsonObj){
 
 		var body = document.getElementById('section');
@@ -49,13 +51,10 @@
 
     var clone = card.cloneNode(true);
 
-		var subs = []
-
     card.remove()
 
 		for (var i = 0; i < jsonObj.length; i++){
 
-      subs.push(jsonObj[i].subscribers)
 			var clone = card.cloneNode(true);
 			console.log(jsonObj[i])
       clone.firstChild.nextSibling.style.display = "block";
@@ -68,9 +67,5 @@
 			body.appendChild(clone);
 
 		}
-
-    subs.sort(function(a, b){return b-a})
-
-    console.log(subs)
 
 	}

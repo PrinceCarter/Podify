@@ -1,5 +1,7 @@
 var overlay = document.getElementById("overlay");
 
+
+// Loading animation
 window.addEventListener('load', function(){
 
   overlay.style.display = 'none';
@@ -21,6 +23,7 @@ $(function(){
 
 })
 
+// Get top 20 categories from gPodder
 function loadCategories(){
 
   $.ajax({
@@ -30,8 +33,6 @@ function loadCategories(){
 
 
   }).done(function(res){
-
-    console.log(res)
 
     makeButton(res)
 
@@ -43,19 +44,26 @@ loadCategories()
 
 function makeButton(jsonObj){
 
-  var categories = document.getElementById('categories')
+//Get Categories section
+var categories = document.getElementById('categories')
 
-  var category = document.getElementById('category')
+//Get Categories button
+var category = document.getElementById('category')
 
 // Load out each card from the sort array
 for (var i = 0; i < jsonObj.length; i++){
-
     var clone = category.cloneNode(true);
-    //clone.firstChild.nextSibling.style.display = "block";
+    clone.firstChild.style.display = 'block'
     clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
     clone.getElementsByTagName("a")[0].href = '/search.html?q=' + jsonObj[i].tag;
-    categories.appendChild(clone)
+    //Fix Youtube's href
+    if (jsonObj[i].title === 'Youtube'){
 
+      clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
+      clone.getElementsByTagName("a")[0].href = '/search.html?q=youtube';
+
+    }
+    categories.appendChild(clone)
   }
 
 }

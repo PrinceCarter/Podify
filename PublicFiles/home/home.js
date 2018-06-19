@@ -1,11 +1,14 @@
 var overlay = document.getElementById("overlay");
 
+//Loading animation
 window.addEventListener('load', function(){
 
   overlay.style.display = 'none';
 
 })
 
+//Get user suggestions from gPodder
+//Until the Suggestions API gets fixed, I will suggest tech podcasts
 function loadSuggestions(){
 
   $.ajax({
@@ -15,8 +18,6 @@ function loadSuggestions(){
 
 
   }).done(function(res){
-
-    console.log(res);
 
     makeCard(res)
 
@@ -40,6 +41,7 @@ $(function(){
 
 })
 
+// Create Podcast Cards
 function makeCard(jsonObj){
 
   var body = document.getElementById('section');
@@ -50,7 +52,7 @@ function makeCard(jsonObj){
 
   card.remove()
 
-var subs = []
+  var subs = []
 
 // Load Subs array with all JSON objects
 for (var i = 0; i < jsonObj.length; i++){
@@ -59,6 +61,7 @@ for (var i = 0; i < jsonObj.length; i++){
 
 }
 
+// Sorting function
 function sortJSON(data, key, way) {
   return data.sort(function(a, b) {
       var x = a[key]; var y = b[key];
@@ -81,7 +84,6 @@ for (var i = 0; i < subs.length; i++){
     clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + subs[i].subscribers;
     clone.getElementsByTagName('p')[0].innerText = subs[i].description;
     $(clone).find("#podcast-img").attr('src', ''+ subs[i].logo_url + '');
-    console.log(subs)
     body.appendChild(clone);
 
   }

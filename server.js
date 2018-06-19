@@ -3,6 +3,8 @@ const app = express()
 var request = require('request')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
+app.use(cookieParser())
+var loggedIn = null;
 
 var request = request.defaults({jar: true})
 var j = request.jar()
@@ -18,7 +20,7 @@ var username;
 app.get('/logout', function (req, res) {
 
   request.post({url: 'https://gpodder.net/api/2/auth/'+ username +'/logout.json', jar: j},function(e,r,body){
-
+  loggedIn = null;
   res.redirect('/login.html')
 
   })
@@ -53,35 +55,44 @@ app.post('/login', urlencodedParser, function (req, res) {
 
   username = req.body.username;
 
-  var cookie = request.post({url: 'https://gpodder.net/api/2/auth/'+ username +'/login.json', jar: j}, function(e,r,body){
+  request.post({url: 'https://gpodder.net/api/2/auth/'+ username +'/login.json', jar: j}, function(e,r,body){
+
+    if (r.statusCode === 200){
+
+      res.cookie('username', username)
+      loggedIn = true;
+      res.redirect('/index.html')
+
+    } else{
+
+      res.redirect('/login.html')
+
+    }
 
   }).auth(req.body.username, req.body.password, false)
 
-  res.cookie('username', username)
 
-  console.log(req.cookies)
-
-  res.redirect('/index.html')
 
 })
 
+app.use((req, res, next) => shouldAuthenticate(req) ? isAuthenticated(req, res, next) : next())
 
+function shouldAuthenticate(req){
+  var authPaths = ["/","/index.html", "/popular.html", "subscriptions.html", "categories.html"]
+  if(authPaths.includes(req.path)){
+    return true;
+  } else  return false;
+}
 
 function isAuthenticated(req, res, next) {
-  // do any checks you want to in here
 
-  // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
-  // you can do this however you want with whatever variables you set up
-  // if (req.body.username.authenticated)
-  //     return next();
-  // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
-  res.redirect('/login.html');
+  if (loggedIn === null){
+    res.redirect("/login.html");
+    //next();
+  }
+  next();
 }
 
 //app.use(isAuthenticated())
-
 app.use(express.static('PublicFiles'))
-
-app.use(cookieParser())
-
 app.listen(process.env.PORT || 8000);

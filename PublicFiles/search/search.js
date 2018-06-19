@@ -1,32 +1,13 @@
 var overlay = document.getElementById("overlay");
 
+//Loading animation
 	window.addEventListener('load', function(){
 
 		overlay.style.display = 'none';
 
 	})
 
-
-  $(function(){
-
-    $('#searchForm').on('submit', function(e){
-
-      e.preventDefault()
-
-      var searchText = $('#search').val()
-
-      window.location.href = '/search.html?q=' + searchText
-
-    })
-
-  })
-
-  var urlParams = new URLSearchParams(window.location.search);
-
-  var searchText = urlParams.get('q')
-
-  search(searchText)
-
+//Search for a given podcast
   function search(searchText){
 
     $.ajax({
@@ -44,6 +25,27 @@ var overlay = document.getElementById("overlay");
 
   }
 
+	$(function(){
+
+		$('#searchForm').on('submit', function(e){
+
+			e.preventDefault()
+
+			var searchText = $('#search').val()
+
+			window.location.href = '/search.html?q=' + searchText
+
+		})
+
+	})
+
+	var urlParams = new URLSearchParams(window.location.search);
+
+	var searchText = urlParams.get('q')
+
+	search(searchText)
+
+//Create Podcast Cards
   function makeCard(jsonObj){
 
 		var body = document.getElementById('section');
@@ -63,6 +65,7 @@ var overlay = document.getElementById("overlay");
 
   }
 
+// Sorting function
   function sortJSON(data, key, way) {
     return data.sort(function(a, b) {
         var x = a[key]; var y = b[key];
@@ -85,7 +88,6 @@ var overlay = document.getElementById("overlay");
       clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + subs[i].subscribers;
       clone.getElementsByTagName('p')[0].innerText = subs[i].description;
       $(clone).find("#podcast-img").attr('src', ''+ subs[i].logo_url + '');
-      console.log(subs)
 			body.appendChild(clone);
 
 		}
