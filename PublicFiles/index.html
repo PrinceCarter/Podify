@@ -15,8 +15,8 @@
 	<!-- Stylesheets -->
 	<link href="common-css/bootstrap.css" rel="stylesheet">
 	<link href="common-css/ionicons.css" rel="stylesheet">
-	<link href="layout-1/css/styles.css" rel="stylesheet">
-	<link href="layout-1/css/responsive.css" rel="stylesheet">
+	<link href="home/css/styles.css" rel="stylesheet">
+	<link href="home/css/responsive.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </head>
 <body>
@@ -42,26 +42,47 @@
 		</div><!-- conatiner -->
 	</header>
 
-	<div class="slider text-center"><h4 class="header-title animate-pop-in">We've suggested some podcasts for you</h4></div><!-- slider -->
+
+			<div class="slider text-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-1"></div>
+						<h4 class="header-title animate-pop-in col-lg-10">We've Suggested Some <br/>Podcasts For You</h4></div><!-- slider -->
+						<div class="col-lg-1"></div>
+					</div>
+			</div>
 
 	<section class="blog-area section">
 		<div class="container">
 
 			<div class="row" id="section">
 
+				<div id="overlay">
+					<div class="spinner"></div>
+				</div>
+
 				<div class="col-lg-4 col-md-6" id="card1">
-					<div class="card h-100">
+					<div class="card h-100" >
 						<div class="single-post post-style-1">
 
-							<div class="blog-image"><img src="" alt="Blog Image"></div>
+							<div class="blog-image"><img id="podcast-img" src="" alt="Blog Image"></div>
 
 							<div class="blog-info">
 
-								<h4 class="title"><a href="#"><b></b></a></h4>
-								<p></p>
+								<h4 class="title"><b><a href=""></a></b></h4>
+
+                <p>
+                  This is some text
+                </p>
+                <div class="tag-area">
+                  <ul>
+                  <li><a class="subscribe" href="#">Click here to Subscribe!</a></li>
+                </ul>
+                </div>
+
 								<ul class="post-footer">
 									<!-- <li><a href="#"><i class="ion-heart"></i>57</a></li> -->
-									<li><a href="#"><i class="logo-rss"></i></a></li>
+									<li><a><i class="logo-rss"></i>138</a></li>
 								</ul>
 
 							</div><!-- blog-info -->
@@ -70,8 +91,6 @@
 				</div><!-- col-lg-4 col-md-6 -->
 
 			</div><!-- row -->
-
-			<a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
 
 		</div><!-- container -->
 	</section><!-- section -->
@@ -82,30 +101,19 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-lg-6 col-md-6">
+				<div class="col-lg-2 col-md-2"></div>
+				<div class="col-lg-8 col-md-8">
 					<div class="footer-section">
-						<p class="copyright">Prince Carter @ 2018. All rights reserved.</p>
-						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
-
-				<div class="col-lg-6 col-md-6">
-					<div class="footer-section">
-
-						<h4 class="title"><b>SUBSCRIBE</b></h4>
-						<div class="input-area">
-							<form>
-								<input class="email-input" type="text" placeholder="Enter your email">
-								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
-							</form>
-						</div>
+						<p class="copyright text-center">Prince Carter @ 2018. All rights reserved.</p>
+						<p class="copyright text-center">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+					<div class="col-lg-2 col-md-2"></div>
 
 					</div><!-- footer-section -->
 				</div><!-- col-lg-4 col-md-6 -->
 
 			</div><!-- row -->
 		</div><!-- container -->
+
 	</footer>
 
 
@@ -115,24 +123,33 @@
 
 	<script>
 
-	function loadTopPodcast(){
+	var overlay = document.getElementById("overlay");
 
-		$.ajax({
+	window.addEventListener('load', function(){
 
-			method: 'GET',
-			url: '/suggestions'
+		overlay.style.display = 'none';
+
+	})
+
+	function loadSuggestions(){
+
+    $.ajax({
+
+      method: 'GET',
+      url: 'https://gpodder.net/api/2/tag/tech/6.json'
 
 
-		}).done(function(res){
+    }).done(function(res){
 
-			makeCard(res)
+			console.log(res);
 
-		})
+      makeCard(res)
 
+    })
 
-	}
+  }
 
-	loadTopPodcast()
+	loadSuggestions()
 
 	$(function(){
 
@@ -184,6 +201,7 @@
       var clone = card.cloneNode(true);
       clone.firstChild.nextSibling.style.display = "block";
 			clone.getElementsByTagName("a")[0].innerText = subs[i].title;
+			clone.getElementsByTagName("a")[0].href = jsonObj[i].website;
       clone.getElementsByTagName("a")[1].href = subs[i].mygpo_link;
       clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + subs[i].subscribers;
       clone.getElementsByTagName('p')[0].innerText = subs[i].description;

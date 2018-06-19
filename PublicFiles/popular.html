@@ -40,22 +40,33 @@
 		</div><!-- conatiner -->
 	</header>
 
-	<div class="slider"><h4 class="header-title animate-pop-in">Check out the Top 15 Podcasts<br /></h4></div><!-- slider -->
+	<div class="slider text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-1"></div>
+				<h4 class="header-title animate-pop-in col-lg-10">Check Out The <br/>Top 10 Podcasts</h4></div><!-- slider -->
+				<div class="col-lg-1"></div>
+			</div>
+	</div>
 
 	<section class="blog-area section">
 		<div class="container">
 
 			<div class="row" id="section">
 
+				<div id="overlay">
+					<div class="spinner"></div>
+				</div>
+
 				<div class="col-lg-4 col-md-6" id="card1">
 					<div class="card h-100" >
 						<div class="single-post post-style-1">
 
-							<div class="blog-image"><img id="podcast-img" src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img id="podcast-img" src="" alt="Blog Image"></div>
 
 							<div class="blog-info">
 
-								<h4 class="title"><b><a></a></b></h4>
+								<h4 class="title"><b><a href=""></a></b></h4>
 
                 <p>
                   This is some text
@@ -68,7 +79,7 @@
 
 								<ul class="post-footer">
 									<!-- <li><a href="#"><i class="ion-heart"></i>57</a></li> -->
-									<li><a href="#"><i class="logo-rss"></i>138</a></li>
+									<li><a><i class="logo-rss"></i>138</a></li>
 								</ul>
 
 							</div><!-- blog-info -->
@@ -87,31 +98,19 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-lg-6 col-md-6">
+				<div class="col-lg-2 col-md-2"></div>
+				<div class="col-lg-8 col-md-8">
 					<div class="footer-section">
-
-						<p class="copyright">Prince Carter @ 2018. All rights reserved.</p>
-						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
-
-				<div class="col-lg-6 col-md-6">
-					<div class="footer-section">
-
-						<h4 class="title"><b>SUBSCRIBE</b></h4>
-						<div class="input-area">
-							<form>
-								<input class="email-input" type="text" placeholder="Enter your email">
-								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
-							</form>
-						</div>
+						<p class="copyright text-center">Prince Carter @ 2018. All rights reserved.</p>
+						<p class="copyright text-center">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+					<div class="col-lg-2 col-md-2"></div>
 
 					</div><!-- footer-section -->
 				</div><!-- col-lg-4 col-md-6 -->
 
 			</div><!-- row -->
 		</div><!-- container -->
+
 	</footer>
 
 
@@ -120,6 +119,14 @@
 	<script src="common-js/jquery-3.1.1.min.js"></script>
 
 	<script>
+
+	var overlay = document.getElementById("overlay");
+
+	window.addEventListener('load', function(){
+
+  	overlay.style.display = 'none';
+
+	})
 
 	function loadTopPodcast(){
 
@@ -174,6 +181,7 @@
 			console.log(jsonObj[i])
       clone.firstChild.nextSibling.style.display = "block";
 			clone.getElementsByTagName("a")[0].innerText = jsonObj[i].title;
+			clone.getElementsByTagName("a")[0].href = jsonObj[i].website;
       clone.getElementsByTagName("a")[1].href = jsonObj[i].mygpo_link;
       clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + jsonObj[i].subscribers;
       clone.getElementsByTagName('p')[0].innerText = jsonObj[i].description;

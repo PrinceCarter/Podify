@@ -12,8 +12,8 @@
 	<!-- Stylesheets -->
 	<link href="common-css/bootstrap.css" rel="stylesheet">
 	<link href="common-css/ionicons.css" rel="stylesheet">
-	<link href="layout-1/css/styles.css" rel="stylesheet">
-	<link href="layout-1/css/responsive.css" rel="stylesheet">
+	<link href="search/css/styles.css" rel="stylesheet">
+	<link href="search/css/responsive.css" rel="stylesheet">
 
 </head>
 <body>
@@ -45,6 +45,9 @@
 
 	<section class="blog-area section">
 		<div class="container">
+			<div id="overlay">
+				<div class="spinner"></div>
+			</div>
 
 			<div class="row" id="section">
 
@@ -56,7 +59,7 @@
 
 							<div class="blog-info">
 
-								<h4 class="title"><b><a></a></b></h4>
+								<h4 class="title"><b><a href=""></a></b></h4>
                 <p></p>
                 <div class="tag-area">
                   <ul>
@@ -65,7 +68,7 @@
                 </div>
 								<ul class="post-footer">
 									<!-- <li><a href="#"><i class="ion-heart"></i>57</a></li> -->
-									<li><a href="#" class="subscribers"><i class="ion-eye"></i></a></li>
+									<li><a class="subscribers"><i class="ion-eye"></i></a></li>
 								</ul>
 
 							</div><!-- blog-info -->
@@ -77,39 +80,40 @@
 
 		</div><!-- container -->
 	</section><!-- section -->
+
 	<footer>
+
 		<div class="container">
 			<div class="row">
 
-				<div class="col-lg-6 col-md-6">
+				<div class="col-lg-2 col-md-2"></div>
+				<div class="col-lg-8 col-md-8">
 					<div class="footer-section">
-						<p class="copyright">Prince Carter @ 2017. All rights reserved.</p>
-						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
-
-				<div class="col-lg-6 col-md-6">
-					<div class="footer-section">
-
-						<h4 class="title"><b>SUBSCRIBE</b></h4>
-						<div class="input-area">
-							<form>
-								<input class="email-input" type="text" placeholder="Enter your email">
-								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
-							</form>
-						</div>
+						<p class="copyright text-center">Prince Carter @ 2018. All rights reserved.</p>
+						<p class="copyright text-center">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+					<div class="col-lg-2 col-md-2"></div>
 
 					</div><!-- footer-section -->
 				</div><!-- col-lg-4 col-md-6 -->
 
 			</div><!-- row -->
 		</div><!-- container -->
+
 	</footer>
 
 	<!-- SCIPTS -->
 	<script src="common-js/jquery-3.1.1.min.js"></script>
   <script>
+
+	var overlay = document.getElementById("overlay");
+
+	window.addEventListener('load', function(){
+
+		overlay.style.display = 'none';
+
+	})
+
+
   $(function(){
 
     $('#searchForm').on('submit', function(e){
@@ -183,6 +187,7 @@
       var clone = card.cloneNode(true);
       clone.firstChild.nextSibling.style.display = "block";
 			clone.getElementsByTagName("a")[0].innerText = subs[i].title;
+			clone.getElementsByTagName("a")[0].href = jsonObj[i].website;
       clone.getElementsByTagName("a")[1].href = subs[i].mygpo_link;
       clone.getElementsByTagName("a")[2].innerText = 'Subscribers: ' + subs[i].subscribers;
       clone.getElementsByTagName('p')[0].innerText = subs[i].description;
