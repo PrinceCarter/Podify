@@ -27,9 +27,10 @@ app.post('/login', urlencodedParser, function (req, res) {
       loggedIn = true;
       res.redirect('/index.html')
 
-    } else{
+    } else {
+      
+      res.redirect('/login.html?l=loginfailed')
 
-      res.redirect('/login.html')
 
     }
 
@@ -85,18 +86,17 @@ function shouldAuthenticate(req){
   var authPaths = ["/","/index.html", "/popular.html", "/subscriptions.html", "/categories.html", "/search.html"]
   if(authPaths.includes(req.path)){
     return true;
-  } else  return false;
+  } else
+    return false;
 }
 
 function isAuthenticated(req, res, next) {
 
   if (loggedIn === null){
     res.redirect("/login.html");
-    //next();
   }
   next();
 }
 
-//app.use(isAuthenticated())
 app.use(express.static('PublicFiles'))
 app.listen(process.env.PORT || 8000);

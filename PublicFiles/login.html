@@ -26,14 +26,15 @@
           <form id="login-form" class="form-container" method="POST" action="/login">
             <div class="form-group">
               <label for="username">Username</label>
-              <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username">
+              <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username" required>
               <small id="emailHelp" class="form-text">Please enter your gPodder credentials</small>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             </div>
             <div class="form-group form-check">
+              <small id="loginError" class="form-text"></small>
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label rem" for="check">Remember me</label>
             </div>
@@ -47,6 +48,24 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <script>
 
+    $(function(){
+
+      var urlParams = new URLSearchParams(window.location.search);
+
+      var loginText = urlParams.get('l')
+
+      if('loginfailed' == loginText){
+
+        $('#loginError').text('Invalid username/password combination. Please try again.')
+
+      }
+
+
+
+    })
+
+    </script>
   </body>
 </html>
